@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - Blog Variant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+</head>
+<body>
+    <div class="page-shell">
+        <canvas id="particles-canvas" aria-hidden="true"></canvas>
+        <div class="ambient ambient-one" aria-hidden="true"></div>
+        <div class="ambient ambient-two" aria-hidden="true"></div>
+
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="logo">
+                    <span class="logo-mark">BV</span>
+                    <span class="logo-text">Blog Variant</span>
+                </a>
+
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="site-nav" id="site-nav">
+                    <a href="/">首页</a>
+                    
+                    <a href="/category/tech/">技术</a>
+                    
+                    <a href="/category/life/">生活</a>
+                    
+                    <a href="/category/notes/">随笔</a>
+                    
+                    <a href="/category/hobby/">爱好</a>
+                    
+                    <a href="/#about">关于我</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+<section class="hero-section" id="about">
+    <div class="hero-copy">
+        <p class="eyebrow">Creative Coding Journal</p>
+        <h1>记录代码、设计与思考，保持技术表达的清澈。</h1>
+        <p class="hero-intro">
+            我是 Nino，一名关注 Python、Flask、前端体验与视觉秩序的开发者。
+            这里收纳技术实践、生活碎片、阅读感受，以及持续学习中的每一次迭代。
+        </p>
+        <div class="hero-actions">
+            <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+            <a href="446670081@qq.com">Email</a>
+            <a href="#category-overview">浏览分类</a>
+        </div>
+    </div>
+
+    <aside class="identity-card">
+        <div class="identity-top">
+            <div class="profile-avatar">N</div>
+            <div>
+                <p class="identity-role">Developer / Writer</p>
+                <h2>Nino</h2>
+            </div>
+        </div>
+        <p class="identity-bio">
+            Normal Input Normal Output!
+            理所当然的学习、工作、生活！
+        </p>
+        <div class="skill-list">
+            <span>Python</span>
+            <span>Flask</span>
+            <span>Frontend</span>
+            <span>Design</span>
+        </div>
+        <dl class="identity-stats">
+            <div>
+                <dt>文章</dt>
+                <dd>6</dd>
+            </div>
+            <div>
+                <dt>分类</dt>
+                <dd>4</dd>
+            </div>
+            <div>
+                <dt>状态</dt>
+                <dd>持续更新</dd>
+            </div>
+        </dl>
+    </aside>
+</section>
+
+<section class="section-block">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Latest Notes</p>
+            <h2>最近更新</h2>
+        </div>
+        <p>从今往后，一起度过满是愉悦之事的人生吧</p>
+    </div>
+
+    <div class="featured-grid">
+        
+        <a href="/post/obsidian-blog-workflow/" class="featured-card" style="--delay: 0.0s;">
+            <p class="featured-category">技术</p>
+            <h3>用 Obsidian 管理博客正文</h3>
+            <p>将 Obsidian 里的 Markdown 文章直接接入博客的一种轻量工作流。</p>
+            <span>2026年03月08日</span>
+        </a>
+        
+        <a href="/post/%E5%8E%86%E5%8F%B2/" class="featured-card" style="--delay: 0.08s;">
+            <p class="featured-category">技术</p>
+            <h3>SRP历史234</h3>
+            <p>用一句话概括这篇文章的核心内容。</p>
+            <span>2026年03月08日</span>
+        </a>
+        
+        <a href="/post/hello-world/" class="featured-card" style="--delay: 0.16s;">
+            <p class="featured-category">随笔</p>
+            <h3>你好，世界</h3>
+            <p>这是我博客的第一篇文章，记录一下创建博客的过程和心情。</p>
+            <span>2024年01月15日</span>
+        </a>
+        
+    </div>
+</section>
+
+<section class="section-block" id="category-overview">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Browse by Topic</p>
+            <h2>分类导航</h2>
+        </div>
+        <p>Nine Lives Blade Works!</p>
+    </div>
+
+    <div class="category-pills">
+        
+        <a href="/category/tech/">技术 · 4</a>
+        
+        <a href="/category/life/">生活 · 0</a>
+        
+        <a href="/category/notes/">随笔 · 2</a>
+        
+        <a href="/category/hobby/">爱好 · 0</a>
+        
+    </div>
+
+    <div class="category-sections">
+        
+        <section class="category-panel">
+            <div class="panel-head">
+                <div>
+                    <p class="panel-kicker">4 篇文章</p>
+                    <h3>技术</h3>
+                </div>
+                <a href="/category/tech/">查看全部</a>
+            </div>
+
+            <div class="post-list compact-posts">
+                
+                    
+                    <a href="/post/obsidian-blog-workflow/" class="post-card" style="--delay: 0.0s;">
+                        <h4>用 Obsidian 管理博客正文</h4>
+                        <p class="description">将 Obsidian 里的 Markdown 文章直接接入博客的一种轻量工作流。</p>
+                        <div class="post-meta">
+                            <span>2026年03月08日</span>
+                            <span>技术</span>
+                        </div>
+                        
+                        <div class="tags">
+                            
+                            <span class="tag">Obsidian</span>
+                            
+                            <span class="tag">Markdown</span>
+                            
+                            <span class="tag">Workflow</span>
+                            
+                        </div>
+                        
+                    </a>
+                    
+                    <a href="/post/%E5%8E%86%E5%8F%B2/" class="post-card" style="--delay: 0.06s;">
+                        <h4>SRP历史234</h4>
+                        <p class="description">用一句话概括这篇文章的核心内容。</p>
+                        <div class="post-meta">
+                            <span>2026年03月08日</span>
+                            <span>技术</span>
+                        </div>
+                        
+                        <div class="tags">
+                            
+                            <span class="tag">Python</span>
+                            
+                            <span class="tag">Flask</span>
+                            
+                        </div>
+                        
+                    </a>
+                    
+                
+            </div>
+        </section>
+        
+        <section class="category-panel">
+            <div class="panel-head">
+                <div>
+                    <p class="panel-kicker">0 篇文章</p>
+                    <h3>生活</h3>
+                </div>
+                <a href="/category/life/">查看全部</a>
+            </div>
+
+            <div class="post-list compact-posts">
+                
+                <div class="empty-inline">
+                    <p>该分类暂时还没有文章，后续会持续补充。</p>
+                </div>
+                
+            </div>
+        </section>
+        
+        <section class="category-panel">
+            <div class="panel-head">
+                <div>
+                    <p class="panel-kicker">2 篇文章</p>
+                    <h3>随笔</h3>
+                </div>
+                <a href="/category/notes/">查看全部</a>
+            </div>
+
+            <div class="post-list compact-posts">
+                
+                    
+                    <a href="/post/hello-world/" class="post-card" style="--delay: 0.0s;">
+                        <h4>你好，世界</h4>
+                        <p class="description">这是我博客的第一篇文章，记录一下创建博客的过程和心情。</p>
+                        <div class="post-meta">
+                            <span>2024年01月15日</span>
+                            <span>随笔</span>
+                        </div>
+                        
+                        <div class="tags">
+                            
+                            <span class="tag">随笔</span>
+                            
+                            <span class="tag">博客</span>
+                            
+                            <span class="tag">Flask</span>
+                            
+                        </div>
+                        
+                    </a>
+                    
+                    <a href="/post/learn-to-code-2024/" class="post-card" style="--delay: 0.06s;">
+                        <h4>2024年编程学习路线</h4>
+                        <p class="description">分享我的编程学习经验和路线规划，希望能对初学者有所帮助。</p>
+                        <div class="post-meta">
+                            <span>2024年01月01日</span>
+                            <span>随笔</span>
+                        </div>
+                        
+                        <div class="tags">
+                            
+                            <span class="tag">学习</span>
+                            
+                            <span class="tag">编程</span>
+                            
+                            <span class="tag">经验</span>
+                            
+                        </div>
+                        
+                    </a>
+                    
+                
+            </div>
+        </section>
+        
+        <section class="category-panel">
+            <div class="panel-head">
+                <div>
+                    <p class="panel-kicker">0 篇文章</p>
+                    <h3>爱好</h3>
+                </div>
+                <a href="/category/hobby/">查看全部</a>
+            </div>
+
+            <div class="post-list compact-posts">
+                
+                <div class="empty-inline">
+                    <p>该分类暂时还没有文章，后续会持续补充。</p>
+                </div>
+                
+            </div>
+        </section>
+        
+    </div>
+</section>
+
+        </main>
+
+        <footer class="site-footer">
+            <p>以代码表达秩序，以设计容纳灵感。</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById("site-nav");
+            var button = document.querySelector(".menu-toggle");
+            var isActive = nav.classList.toggle("active");
+            button.setAttribute("aria-expanded", isActive ? "true" : "false");
+        }
+
+        (function () {
+            var canvas = document.getElementById("particles-canvas");
+            if (!canvas) return;
+
+            var ctx = canvas.getContext("2d");
+            var particles = [];
+            var mouse = { x: null, y: null, active: false };
+            var isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var density = window.innerWidth < 768 ? 28 : 56;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                density = window.innerWidth < 768 ? 28 : 56;
+                createParticles();
+            }
+
+            function createParticles() {
+                particles = [];
+                for (var i = 0; i < density; i += 1) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.32,
+                        vy: (Math.random() - 0.5) * 0.32,
+                        radius: Math.random() * 1.8 + 0.8
+                    });
+                }
+            }
+
+            function drawConnections() {
+                for (var i = 0; i < particles.length; i += 1) {
+                    for (var j = i + 1; j < particles.length; j += 1) {
+                        var dx = particles[i].x - particles[j].x;
+                        var dy = particles[i].y - particles[j].y;
+                        var distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 110) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = "rgba(38, 48, 64, " + ((1 - distance / 110) * 0.16) + ")";
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function updateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(function (particle) {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    if (particle.x <= -20 || particle.x >= canvas.width + 20) particle.vx *= -1;
+                    if (particle.y <= -20 || particle.y >= canvas.height + 20) particle.vy *= -1;
+
+                    if (mouse.active && mouse.x !== null && mouse.y !== null) {
+                        var mdx = particle.x - mouse.x;
+                        var mdy = particle.y - mouse.y;
+                        var mouseDistance = Math.sqrt(mdx * mdx + mdy * mdy);
+                        if (mouseDistance < 120 && mouseDistance > 0) {
+                            particle.x += mdx / mouseDistance * 0.35;
+                            particle.y += mdy / mouseDistance * 0.35;
+                        }
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(21, 31, 47, 0.38)";
+                    ctx.fill();
+                });
+
+                drawConnections();
+
+                if (!isReduced) {
+                    window.requestAnimationFrame(updateParticles);
+                }
+            }
+
+            window.addEventListener("mousemove", function (event) {
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+                mouse.active = true;
+            }, { passive: true });
+
+            window.addEventListener("mouseleave", function () {
+                mouse.active = false;
+            });
+
+            window.addEventListener("resize", resizeCanvas);
+            resizeCanvas();
+
+            if (isReduced) {
+                updateParticles();
+            } else {
+                window.requestAnimationFrame(updateParticles);
+            }
+        })();
+    </script>
+    
+</body>
+</html>

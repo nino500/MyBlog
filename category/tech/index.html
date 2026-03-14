@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技术 - Blog Variant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+</head>
+<body>
+    <div class="page-shell">
+        <canvas id="particles-canvas" aria-hidden="true"></canvas>
+        <div class="ambient ambient-one" aria-hidden="true"></div>
+        <div class="ambient ambient-two" aria-hidden="true"></div>
+
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="logo">
+                    <span class="logo-mark">BV</span>
+                    <span class="logo-text">Blog Variant</span>
+                </a>
+
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="site-nav" id="site-nav">
+                    <a href="/">首页</a>
+                    
+                    <a href="/category/tech/">技术</a>
+                    
+                    <a href="/category/life/">生活</a>
+                    
+                    <a href="/category/notes/">随笔</a>
+                    
+                    <a href="/category/hobby/">爱好</a>
+                    
+                    <a href="/#about">关于我</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+<section class="category-hero">
+    <p class="eyebrow">Category Archive</p>
+    <h1>技术</h1>
+    <p class="category-intro">聚合与 技术 相关的文章，方便按主题快速浏览。</p>
+    <div class="category-summary">
+        <span>4 篇文章</span>
+        <a href="/#category-overview">返回分类导航</a>
+    </div>
+</section>
+
+<section class="section-block">
+    <div class="post-list">
+        
+            
+            <a href="/post/obsidian-blog-workflow/" class="post-card" style="--delay: 0.0s;">
+                <p class="featured-category">技术</p>
+                <h2>用 Obsidian 管理博客正文</h2>
+                <p class="description">将 Obsidian 里的 Markdown 文章直接接入博客的一种轻量工作流。</p>
+                <div class="post-meta">
+                    <span>2026年03月08日</span>
+                    <span>技术</span>
+                </div>
+                
+                <div class="tags">
+                    
+                    <span class="tag">Obsidian</span>
+                    
+                    <span class="tag">Markdown</span>
+                    
+                    <span class="tag">Workflow</span>
+                    
+                </div>
+                
+            </a>
+            
+            <a href="/post/%E5%8E%86%E5%8F%B2/" class="post-card" style="--delay: 0.06s;">
+                <p class="featured-category">技术</p>
+                <h2>SRP历史234</h2>
+                <p class="description">用一句话概括这篇文章的核心内容。</p>
+                <div class="post-meta">
+                    <span>2026年03月08日</span>
+                    <span>技术</span>
+                </div>
+                
+                <div class="tags">
+                    
+                    <span class="tag">Python</span>
+                    
+                    <span class="tag">Flask</span>
+                    
+                </div>
+                
+            </a>
+            
+            <a href="/post/python-flask-tutorial/" class="post-card" style="--delay: 0.12s;">
+                <p class="featured-category">技术</p>
+                <h2>Python Flask 入门教程</h2>
+                <p class="description">从零开始学习Flask框架，快速搭建自己的Web应用。</p>
+                <div class="post-meta">
+                    <span>2024年01月10日</span>
+                    <span>技术</span>
+                </div>
+                
+                <div class="tags">
+                    
+                    <span class="tag">Python</span>
+                    
+                    <span class="tag">Flask</span>
+                    
+                    <span class="tag">教程</span>
+                    
+                    <span class="tag">Web</span>
+                    
+                </div>
+                
+            </a>
+            
+            <a href="/post/responsive-web-design/" class="post-card" style="--delay: 0.18s;">
+                <p class="featured-category">技术</p>
+                <h2>响应式网页设计指南</h2>
+                <p class="description">学习如何使用CSS媒体查询创建适配各种设备的网页。</p>
+                <div class="post-meta">
+                    <span>2024年01月05日</span>
+                    <span>技术</span>
+                </div>
+                
+                <div class="tags">
+                    
+                    <span class="tag">CSS</span>
+                    
+                    <span class="tag">响应式</span>
+                    
+                    <span class="tag">前端</span>
+                    
+                </div>
+                
+            </a>
+            
+        
+    </div>
+</section>
+
+        </main>
+
+        <footer class="site-footer">
+            <p>以代码表达秩序，以设计容纳灵感。</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById("site-nav");
+            var button = document.querySelector(".menu-toggle");
+            var isActive = nav.classList.toggle("active");
+            button.setAttribute("aria-expanded", isActive ? "true" : "false");
+        }
+
+        (function () {
+            var canvas = document.getElementById("particles-canvas");
+            if (!canvas) return;
+
+            var ctx = canvas.getContext("2d");
+            var particles = [];
+            var mouse = { x: null, y: null, active: false };
+            var isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var density = window.innerWidth < 768 ? 28 : 56;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                density = window.innerWidth < 768 ? 28 : 56;
+                createParticles();
+            }
+
+            function createParticles() {
+                particles = [];
+                for (var i = 0; i < density; i += 1) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.32,
+                        vy: (Math.random() - 0.5) * 0.32,
+                        radius: Math.random() * 1.8 + 0.8
+                    });
+                }
+            }
+
+            function drawConnections() {
+                for (var i = 0; i < particles.length; i += 1) {
+                    for (var j = i + 1; j < particles.length; j += 1) {
+                        var dx = particles[i].x - particles[j].x;
+                        var dy = particles[i].y - particles[j].y;
+                        var distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 110) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = "rgba(38, 48, 64, " + ((1 - distance / 110) * 0.16) + ")";
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function updateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(function (particle) {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    if (particle.x <= -20 || particle.x >= canvas.width + 20) particle.vx *= -1;
+                    if (particle.y <= -20 || particle.y >= canvas.height + 20) particle.vy *= -1;
+
+                    if (mouse.active && mouse.x !== null && mouse.y !== null) {
+                        var mdx = particle.x - mouse.x;
+                        var mdy = particle.y - mouse.y;
+                        var mouseDistance = Math.sqrt(mdx * mdx + mdy * mdy);
+                        if (mouseDistance < 120 && mouseDistance > 0) {
+                            particle.x += mdx / mouseDistance * 0.35;
+                            particle.y += mdy / mouseDistance * 0.35;
+                        }
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(21, 31, 47, 0.38)";
+                    ctx.fill();
+                });
+
+                drawConnections();
+
+                if (!isReduced) {
+                    window.requestAnimationFrame(updateParticles);
+                }
+            }
+
+            window.addEventListener("mousemove", function (event) {
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+                mouse.active = true;
+            }, { passive: true });
+
+            window.addEventListener("mouseleave", function () {
+                mouse.active = false;
+            });
+
+            window.addEventListener("resize", resizeCanvas);
+            resizeCanvas();
+
+            if (isReduced) {
+                updateParticles();
+            } else {
+                window.requestAnimationFrame(updateParticles);
+            }
+        })();
+    </script>
+    
+</body>
+</html>

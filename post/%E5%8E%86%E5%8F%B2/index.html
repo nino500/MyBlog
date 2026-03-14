@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRP历史234 - 我的博客</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+</head>
+<body>
+    <div class="page-shell">
+        <canvas id="particles-canvas" aria-hidden="true"></canvas>
+        <div class="ambient ambient-one" aria-hidden="true"></div>
+        <div class="ambient ambient-two" aria-hidden="true"></div>
+
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="logo">
+                    <span class="logo-mark">BV</span>
+                    <span class="logo-text">Blog Variant</span>
+                </a>
+
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="site-nav" id="site-nav">
+                    <a href="/">首页</a>
+                    
+                    <a href="/category/tech/">技术</a>
+                    
+                    <a href="/category/life/">生活</a>
+                    
+                    <a href="/category/notes/">随笔</a>
+                    
+                    <a href="/category/hobby/">爱好</a>
+                    
+                    <a href="/#about">关于我</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+<div class="progress-bar" id="progressBar"></div>
+<div class="post-detail glass-card">
+    <a href="/" class="back-link">
+        ← 返回首页
+    </a>
+
+    <article>
+        <header class="post-header">
+            <h1>SRP历史234</h1>
+            <div class="post-meta">
+                <span>2026年03月08日</span>
+                <span>技术</span>
+            </div>
+            
+            <div class="tags">
+                
+                <span class="tag">Python</span>
+                
+                <span class="tag">Flask</span>
+                
+            </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在这里开始写正文。</p>
+<h2 id="_1">二级标题</h2>
+<ul>
+<li>支持列表</li>
+<li>支持代码块</li>
+<li>支持表格</li>
+</ul>
+<pre><code class="language-python">def hello():
+    return &quot;Hello from Markdown&quot;
+</code></pre>
+<blockquote>
+<p>这是引用内容。</p>
+</blockquote>
+<p>写完后把这个文件另存为新的 <code>.md</code> 文件并放到 <code>posts/</code> 目录即可。</p>
+<h1 id="srp">SRP</h1>
+<p>Scriptable Render Pipeline，可编程渲染管线。</p>
+<p>管线，流水线，指一套用于渲染的流程</p>
+<p>用黑盒来解释
+input就是模型，纹理，摄像机数据，output就是画面
+中间的黑盒就是管线</p>
+<p>shader着色器就是渲染流程的一个环节。
+随着unity支持的平台越来越多，各种平台支持的图形api不同，而老旧的built-in管线封装限制较多，对于这些平台无法进行针对性的条件分支判断和专门定制，会造成一刀切的困境。</p>
+<p>SRP就是通过一套代码，定制分支逻辑，识别不同平台，对每个平台实现不同的渲染方案。比如切换不同的渲染路径，根据设备性能加载不同精度的资源，针对硬件瓶颈的定制优化（移动端关闭抗锯齿等等）</p>
+<h1 id="urp">URP</h1>
+<p>基于SRP的渲染框架，让开发者无需从零编写SRP的核心逻辑。</p>
+<p>SRP是通过c#脚本控制底层的接口，自定义渲染流程；而URP在此基础上，将渲染的逻辑抽象成可配置的模块，开发者通过可视化的面板即可调整关键参数，无需深入API细节。</p>
+        </div>
+
+        
+        <section class="note-network">
+            
+
+            
+            <div class="note-panel">
+                <h2>关联此文</h2>
+                <div class="note-links">
+                    
+                    <a href="/post/obsidian-blog-workflow/" class="note-link-card">
+                        <strong>用 Obsidian 管理博客正文</strong>
+                        <span>技术</span>
+                    </a>
+                    
+                </div>
+            </div>
+            
+        </section>
+        
+    </article>
+</div>
+
+        </main>
+
+        <footer class="site-footer">
+            <p>以代码表达秩序，以设计容纳灵感。</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById("site-nav");
+            var button = document.querySelector(".menu-toggle");
+            var isActive = nav.classList.toggle("active");
+            button.setAttribute("aria-expanded", isActive ? "true" : "false");
+        }
+
+        (function () {
+            var canvas = document.getElementById("particles-canvas");
+            if (!canvas) return;
+
+            var ctx = canvas.getContext("2d");
+            var particles = [];
+            var mouse = { x: null, y: null, active: false };
+            var isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var density = window.innerWidth < 768 ? 28 : 56;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                density = window.innerWidth < 768 ? 28 : 56;
+                createParticles();
+            }
+
+            function createParticles() {
+                particles = [];
+                for (var i = 0; i < density; i += 1) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.32,
+                        vy: (Math.random() - 0.5) * 0.32,
+                        radius: Math.random() * 1.8 + 0.8
+                    });
+                }
+            }
+
+            function drawConnections() {
+                for (var i = 0; i < particles.length; i += 1) {
+                    for (var j = i + 1; j < particles.length; j += 1) {
+                        var dx = particles[i].x - particles[j].x;
+                        var dy = particles[i].y - particles[j].y;
+                        var distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 110) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = "rgba(38, 48, 64, " + ((1 - distance / 110) * 0.16) + ")";
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function updateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(function (particle) {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    if (particle.x <= -20 || particle.x >= canvas.width + 20) particle.vx *= -1;
+                    if (particle.y <= -20 || particle.y >= canvas.height + 20) particle.vy *= -1;
+
+                    if (mouse.active && mouse.x !== null && mouse.y !== null) {
+                        var mdx = particle.x - mouse.x;
+                        var mdy = particle.y - mouse.y;
+                        var mouseDistance = Math.sqrt(mdx * mdx + mdy * mdy);
+                        if (mouseDistance < 120 && mouseDistance > 0) {
+                            particle.x += mdx / mouseDistance * 0.35;
+                            particle.y += mdy / mouseDistance * 0.35;
+                        }
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(21, 31, 47, 0.38)";
+                    ctx.fill();
+                });
+
+                drawConnections();
+
+                if (!isReduced) {
+                    window.requestAnimationFrame(updateParticles);
+                }
+            }
+
+            window.addEventListener("mousemove", function (event) {
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+                mouse.active = true;
+            }, { passive: true });
+
+            window.addEventListener("mouseleave", function () {
+                mouse.active = false;
+            });
+
+            window.addEventListener("resize", resizeCanvas);
+            resizeCanvas();
+
+            if (isReduced) {
+                updateParticles();
+            } else {
+                window.requestAnimationFrame(updateParticles);
+            }
+        })();
+    </script>
+    
+<script>
+(function(){
+  var bar = document.getElementById('progressBar');
+  if (!bar) return;
+  function update(){
+    var doc = document.documentElement;
+    var scrollTop = doc.scrollTop || document.body.scrollTop;
+    var height = doc.scrollHeight - doc.clientHeight;
+    var pct = height > 0 ? (scrollTop / height) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', update, {passive: true});
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+
+</body>
+</html>

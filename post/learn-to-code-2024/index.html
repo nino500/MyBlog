@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024年编程学习路线 - 我的博客</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+</head>
+<body>
+    <div class="page-shell">
+        <canvas id="particles-canvas" aria-hidden="true"></canvas>
+        <div class="ambient ambient-one" aria-hidden="true"></div>
+        <div class="ambient ambient-two" aria-hidden="true"></div>
+
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="logo">
+                    <span class="logo-mark">BV</span>
+                    <span class="logo-text">Blog Variant</span>
+                </a>
+
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="site-nav" id="site-nav">
+                    <a href="/">首页</a>
+                    
+                    <a href="/category/tech/">技术</a>
+                    
+                    <a href="/category/life/">生活</a>
+                    
+                    <a href="/category/notes/">随笔</a>
+                    
+                    <a href="/category/hobby/">爱好</a>
+                    
+                    <a href="/#about">关于我</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+<div class="progress-bar" id="progressBar"></div>
+<div class="post-detail glass-card">
+    <a href="/" class="back-link">
+        ← 返回首页
+    </a>
+
+    <article>
+        <header class="post-header">
+            <h1>2024年编程学习路线</h1>
+            <div class="post-meta">
+                <span>2024年01月01日</span>
+                <span>随笔</span>
+            </div>
+            
+            <div class="tags">
+                
+                <span class="tag">学习</span>
+                
+                <span class="tag">编程</span>
+                
+                <span class="tag">经验</span>
+                
+            </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="_1">为什么学编程？</h2>
+<p>编程已经成为21世纪最重要的技能之一。它不仅是一门技术，更是一种思维方式。学会编程，你可以：</p>
+<ul>
+<li>自动化重复性工作</li>
+<li>创建自己的产品</li>
+<li>解决实际问题</li>
+<li>获得更好的职业发展</li>
+</ul>
+<h2 id="_2">学习路线</h2>
+<h3 id="_3">第一阶段：入门</h3>
+<p>建议从Python开始，它的语法简洁，易于理解。学会基本的数据类型、变量、函数、循环等概念。</p>
+<h3 id="_4">第二阶段：进阶</h3>
+<p>掌握面向对象编程，学会使用库和框架。了解数据结构与算法的基础知识。</p>
+<h3 id="_5">第三阶段：专项</h3>
+<p>选择一个方向深入学习，比如Web开发、数据科学、人工智能等。</p>
+<h2 id="_6">学习方法</h2>
+<ul>
+<li><strong>动手实践</strong>：只看不做是不行的，一定要多写代码</li>
+<li><strong>项目驱动</strong>：通过做项目来学习，比单纯看教程更有效</li>
+<li><strong>阅读源码</strong>：学习优秀的开源项目，提升编程思维</li>
+<li><strong>交流分享</strong>：加入社区，与他人交流，共同进步</li>
+</ul>
+<h2 id="_7">资源推荐</h2>
+<ul>
+<li>Python官方文档</li>
+<li>LeetCode算法题库</li>
+<li>GitHub开源项目</li>
+<li>Stack Overflow问答社区</li>
+</ul>
+<p>最重要的是：坚持下去！</p>
+        </div>
+
+        
+    </article>
+</div>
+
+        </main>
+
+        <footer class="site-footer">
+            <p>以代码表达秩序，以设计容纳灵感。</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById("site-nav");
+            var button = document.querySelector(".menu-toggle");
+            var isActive = nav.classList.toggle("active");
+            button.setAttribute("aria-expanded", isActive ? "true" : "false");
+        }
+
+        (function () {
+            var canvas = document.getElementById("particles-canvas");
+            if (!canvas) return;
+
+            var ctx = canvas.getContext("2d");
+            var particles = [];
+            var mouse = { x: null, y: null, active: false };
+            var isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var density = window.innerWidth < 768 ? 28 : 56;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                density = window.innerWidth < 768 ? 28 : 56;
+                createParticles();
+            }
+
+            function createParticles() {
+                particles = [];
+                for (var i = 0; i < density; i += 1) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.32,
+                        vy: (Math.random() - 0.5) * 0.32,
+                        radius: Math.random() * 1.8 + 0.8
+                    });
+                }
+            }
+
+            function drawConnections() {
+                for (var i = 0; i < particles.length; i += 1) {
+                    for (var j = i + 1; j < particles.length; j += 1) {
+                        var dx = particles[i].x - particles[j].x;
+                        var dy = particles[i].y - particles[j].y;
+                        var distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 110) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = "rgba(38, 48, 64, " + ((1 - distance / 110) * 0.16) + ")";
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function updateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(function (particle) {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    if (particle.x <= -20 || particle.x >= canvas.width + 20) particle.vx *= -1;
+                    if (particle.y <= -20 || particle.y >= canvas.height + 20) particle.vy *= -1;
+
+                    if (mouse.active && mouse.x !== null && mouse.y !== null) {
+                        var mdx = particle.x - mouse.x;
+                        var mdy = particle.y - mouse.y;
+                        var mouseDistance = Math.sqrt(mdx * mdx + mdy * mdy);
+                        if (mouseDistance < 120 && mouseDistance > 0) {
+                            particle.x += mdx / mouseDistance * 0.35;
+                            particle.y += mdy / mouseDistance * 0.35;
+                        }
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(21, 31, 47, 0.38)";
+                    ctx.fill();
+                });
+
+                drawConnections();
+
+                if (!isReduced) {
+                    window.requestAnimationFrame(updateParticles);
+                }
+            }
+
+            window.addEventListener("mousemove", function (event) {
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+                mouse.active = true;
+            }, { passive: true });
+
+            window.addEventListener("mouseleave", function () {
+                mouse.active = false;
+            });
+
+            window.addEventListener("resize", resizeCanvas);
+            resizeCanvas();
+
+            if (isReduced) {
+                updateParticles();
+            } else {
+                window.requestAnimationFrame(updateParticles);
+            }
+        })();
+    </script>
+    
+<script>
+(function(){
+  var bar = document.getElementById('progressBar');
+  if (!bar) return;
+  function update(){
+    var doc = document.documentElement;
+    var scrollTop = doc.scrollTop || document.body.scrollTop;
+    var height = doc.scrollHeight - doc.clientHeight;
+    var pct = height > 0 ? (scrollTop / height) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', update, {passive: true});
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+
+</body>
+</html>

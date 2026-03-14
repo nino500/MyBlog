@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用 Obsidian 管理博客正文 - 我的博客</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+</head>
+<body>
+    <div class="page-shell">
+        <canvas id="particles-canvas" aria-hidden="true"></canvas>
+        <div class="ambient ambient-one" aria-hidden="true"></div>
+        <div class="ambient ambient-two" aria-hidden="true"></div>
+
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="logo">
+                    <span class="logo-mark">BV</span>
+                    <span class="logo-text">Blog Variant</span>
+                </a>
+
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="site-nav" id="site-nav">
+                    <a href="/">首页</a>
+                    
+                    <a href="/category/tech/">技术</a>
+                    
+                    <a href="/category/life/">生活</a>
+                    
+                    <a href="/category/notes/">随笔</a>
+                    
+                    <a href="/category/hobby/">爱好</a>
+                    
+                    <a href="/#about">关于我</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+<div class="progress-bar" id="progressBar"></div>
+<div class="post-detail glass-card">
+    <a href="/" class="back-link">
+        ← 返回首页
+    </a>
+
+    <article>
+        <header class="post-header">
+            <h1>用 Obsidian 管理博客正文</h1>
+            <div class="post-meta">
+                <span>2026年03月08日</span>
+                <span>技术</span>
+            </div>
+            
+            <div class="tags">
+                
+                <span class="tag">Obsidian</span>
+                
+                <span class="tag">Markdown</span>
+                
+                <span class="tag">Workflow</span>
+                
+            </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>如果你平时在 Obsidian 里写文章，那么最自然的发布方式不是把正文复制进 JSON，
+而是直接把 <code>.md</code> 文件放进博客项目里。</p>
+<h2 id="_1">推荐流程</h2>
+<ol>
+<li>在 Obsidian 中完成写作</li>
+<li>补充文章头部元数据</li>
+<li>将文件复制到 <code>posts/</code> 目录</li>
+<li>启动 Flask 预览页面</li>
+</ol>
+<p>你也可以在文章里直接链接到另一篇笔记，比如 <a href="/post/%E5%8E%86%E5%8F%B2/">历史</a>，
+或者使用别名链接 <a href="/post/%E5%8E%86%E5%8F%B2/">查看历史文章</a>。</p>
+<h2 id="_2">为什么这样更好</h2>
+<ul>
+<li>正文不会被 JSON 转义污染</li>
+<li>代码块和标题结构更清晰</li>
+<li>更接近写作者本身的工作方式</li>
+<li>后续扩展图片、表格和标签也更方便</li>
+</ul>
+<h2 id="front-matter">Front Matter 示例</h2>
+<pre><code class="language-yaml">---
+title: 文章标题
+slug: article-slug
+date: 2026-03-08
+category: 技术
+tags:
+  - Obsidian
+  - Markdown
+description: 一句话摘要
+---
+</code></pre>
+<h2 id="_3">当前兼容策略</h2>
+<p>目前博客会优先读取 <code>posts/</code> 目录中的 Markdown 文件，
+同时继续兼容旧的 <code>posts.json</code>，方便你渐进迁移已有文章。</p>
+<h2 id="obsidian">Obsidian 扩展语法</h2>
+<ul>
+<li><code>文章名</code> 会尝试跳转到对应文章页</li>
+<li><code>显示文字</code> 会使用自定义显示文字</li>
+<li><code>![图片](/post-assets/%E5%9B%BE%E7%89%87.png)</code> 会读取 <code>posts/assets/图片.png</code></li>
+</ul>
+<p>如果你要把旧的 JSON 文章迁移成 Markdown，也可以运行：</p>
+<pre><code class="language-bash">python scripts/migrate_json_posts.py
+</code></pre>
+        </div>
+
+        
+        <section class="note-network">
+            
+            <div class="note-panel">
+                <h2>文中提到</h2>
+                <div class="note-links">
+                    
+                    <a href="/post/%E5%8E%86%E5%8F%B2/" class="note-link-card">
+                        <strong>SRP历史234</strong>
+                        <span>技术</span>
+                    </a>
+                    
+                </div>
+            </div>
+            
+
+            
+        </section>
+        
+    </article>
+</div>
+
+        </main>
+
+        <footer class="site-footer">
+            <p>以代码表达秩序，以设计容纳灵感。</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById("site-nav");
+            var button = document.querySelector(".menu-toggle");
+            var isActive = nav.classList.toggle("active");
+            button.setAttribute("aria-expanded", isActive ? "true" : "false");
+        }
+
+        (function () {
+            var canvas = document.getElementById("particles-canvas");
+            if (!canvas) return;
+
+            var ctx = canvas.getContext("2d");
+            var particles = [];
+            var mouse = { x: null, y: null, active: false };
+            var isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var density = window.innerWidth < 768 ? 28 : 56;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                density = window.innerWidth < 768 ? 28 : 56;
+                createParticles();
+            }
+
+            function createParticles() {
+                particles = [];
+                for (var i = 0; i < density; i += 1) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.32,
+                        vy: (Math.random() - 0.5) * 0.32,
+                        radius: Math.random() * 1.8 + 0.8
+                    });
+                }
+            }
+
+            function drawConnections() {
+                for (var i = 0; i < particles.length; i += 1) {
+                    for (var j = i + 1; j < particles.length; j += 1) {
+                        var dx = particles[i].x - particles[j].x;
+                        var dy = particles[i].y - particles[j].y;
+                        var distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 110) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = "rgba(38, 48, 64, " + ((1 - distance / 110) * 0.16) + ")";
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function updateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(function (particle) {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    if (particle.x <= -20 || particle.x >= canvas.width + 20) particle.vx *= -1;
+                    if (particle.y <= -20 || particle.y >= canvas.height + 20) particle.vy *= -1;
+
+                    if (mouse.active && mouse.x !== null && mouse.y !== null) {
+                        var mdx = particle.x - mouse.x;
+                        var mdy = particle.y - mouse.y;
+                        var mouseDistance = Math.sqrt(mdx * mdx + mdy * mdy);
+                        if (mouseDistance < 120 && mouseDistance > 0) {
+                            particle.x += mdx / mouseDistance * 0.35;
+                            particle.y += mdy / mouseDistance * 0.35;
+                        }
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(21, 31, 47, 0.38)";
+                    ctx.fill();
+                });
+
+                drawConnections();
+
+                if (!isReduced) {
+                    window.requestAnimationFrame(updateParticles);
+                }
+            }
+
+            window.addEventListener("mousemove", function (event) {
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+                mouse.active = true;
+            }, { passive: true });
+
+            window.addEventListener("mouseleave", function () {
+                mouse.active = false;
+            });
+
+            window.addEventListener("resize", resizeCanvas);
+            resizeCanvas();
+
+            if (isReduced) {
+                updateParticles();
+            } else {
+                window.requestAnimationFrame(updateParticles);
+            }
+        })();
+    </script>
+    
+<script>
+(function(){
+  var bar = document.getElementById('progressBar');
+  if (!bar) return;
+  function update(){
+    var doc = document.documentElement;
+    var scrollTop = doc.scrollTop || document.body.scrollTop;
+    var height = doc.scrollHeight - doc.clientHeight;
+    var pct = height > 0 ? (scrollTop / height) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', update, {passive: true});
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+
+</body>
+</html>
